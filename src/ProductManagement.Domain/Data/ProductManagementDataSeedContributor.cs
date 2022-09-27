@@ -18,6 +18,12 @@ namespace ProductManagement.Data
         public async Task SeedAsync(DataSeedContext context)
         {
             /***** TODO: Seed initial data here *****/
+            if(await _categoryRepository.CountAsync() > 0)
+            {
+                return;
+            }
+            var monitors = new Category { Name = "Monitors" };
+            var printers = new Product { Name = "Printers" };
         }
     }
 }
