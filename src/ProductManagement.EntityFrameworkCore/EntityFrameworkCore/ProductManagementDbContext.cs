@@ -93,7 +93,7 @@ public class ProductManagementDbContext :
             b.Property(x => x.Name)
              .HasMaxLength(CategoryConsts.MaxNameLength)
              .IsRequired();
-            b.HasIndex();
+            b.HasIndex(x => x.Name);
         });
 
         builder.Entity<Product>(b =>
@@ -104,9 +104,10 @@ public class ProductManagementDbContext :
              .IsRequired();
             b.HasOne(x => x.Category)
              .WithMany()
-             .HasForeignKey(x => x.Category.Id)
+             .HasForeignKey(x => x.CategoryId)
              .OnDelete(DeleteBehavior.Restrict)
              .IsRequired();
+            b.HasIndex(x => x.Name).IsUnique();
         });
     }
 }
